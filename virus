@@ -9,7 +9,7 @@ float map(vec3 pos)
 
 vec3 calcNormal(vec3 pos)
 {
-	vec2 e = vec2(0.0001,0.0);
+	vec2 e = vec2(0.001,0.0);
     return normalize(vec3(map(pos+e.xyy)-map(pos-e.xyy),
                           map(pos+e.yxy)-map(pos-e.yxy),
                           map(pos+e.yyx)-map(pos-e.yyx)));
