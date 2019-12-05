@@ -69,6 +69,7 @@ Material:
     - _Parallax: 0.02
     - _RimAmount: 0.746
     - _RimThreshold: 0.106
+    - _Shininess: 0.7
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -77,6 +78,8 @@ Material:
     m_Colors:
     - _AmbientColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0}
     - _Color: {r: 0.5471698, g: 0.19873619, b: 0.19873619, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 0.995283, b: 0.995283, a: 0}

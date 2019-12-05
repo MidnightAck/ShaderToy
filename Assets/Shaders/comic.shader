@@ -1,6 +1,6 @@
 ﻿Shader "Unlit/comic"
 {
-   Properties
+	Properties
 	{
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("Main Texture", 2D) = "white" {}
@@ -27,6 +27,7 @@
 			Tags
 			{
 				"LightMode" = "ForwardBase"
+				//"LightMode" = "ShadowCaster"
 				"PassFlags" = "OnlyDirectional"
 			}
 
@@ -93,37 +94,22 @@
 				float3 normal = normalize(i.worldNormal);
 				float3 viewDir = normalize(i.viewDir);
 
-				// Lighting below is calculated using Blinn-Phong,
-				// with values thresholded to creat the "toon" look.
-				// https://en.wikipedia.org/wiki/Blinn-Phong_shading_model
-
-				// Calculate illumination from directional light.
-				// _WorldSpaceLightPos0 is a vector pointing the OPPOSITE
-				// direction of the main directional light.
 				float NdotL = dot(_WorldSpaceLightPos0, normal);
 
 				// Samples the shadow map, returning a value in the 0...1 range,
 				// where 0 is in the shadow, and 1 is not.
 				float shadow = SHADOW_ATTENUATION(i);
-				// Partition the intensity into light and dark, smoothly interpolated
-				// between the two to avoid a jagged break.
+				
 				float lightIntensity = smoothstep(0, 0.01, NdotL * shadow);	
-				// Multiply by the main directional light's intensity and color.
 				float4 light = lightIntensity * _LightColor0;
 
-				// Calculate specular reflection.
 				float3 halfVector = normalize(_WorldSpaceLightPos0 + viewDir);
 				float NdotH = dot(normal, halfVector);
-				// Multiply _Glossiness by itself to allow artist to use smaller
-				// glossiness values in the inspector.
 				float specularIntensity = pow(NdotH * lightIntensity, _Glossiness * _Glossiness);
 				float specularIntensitySmooth = smoothstep(0.005, 0.01, specularIntensity);
 				float4 specular = specularIntensitySmooth * _SpecularColor;				
 
-				// Calculate rim lighting.
 				float rimDot = 1 - dot(viewDir, normal);
-				// We only want rim to appear on the lit side of the surface,
-				// so multiply it by NdotL, raised to a power to smoothly blend it.
 				float rimIntensity = rimDot * pow(NdotL, _RimThreshold);
 				rimIntensity = smoothstep(_RimAmount - 0.01, _RimAmount + 0.01, rimIntensity);
 				float4 rim = rimIntensity * _RimColor;
@@ -135,7 +121,8 @@
 			ENDCG
 		}
 
+
 		// Shadow casting support.
-        UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
+		 UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
 	}
 }
