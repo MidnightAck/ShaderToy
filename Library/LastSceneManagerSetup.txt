@@ -1,5 +1,5 @@
 sceneSetups:
-- path: E:/demo/Shader/UnityToonShader-master/UnityToonShader-master/Assets/Main.unity
+- path: Assets/Scenes/Toon.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
