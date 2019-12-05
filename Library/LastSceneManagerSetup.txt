@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/RainWindow.unity
+- path: E:/demo/Shader/UnityToonShader-master/UnityToonShader-master/Assets/Main.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
